@@ -1,13 +1,11 @@
 // LoginForm.js
 import axios from "axios";
 import React, { useState } from "react";
-import DisplayMessage from "./DisplayMessage";
 
 const LoginForm = ({ setIsLogin, setMember }) => {
   const API_URL = process.env.REACT_APP_HOMEPAGE_API_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -18,7 +16,7 @@ const LoginForm = ({ setIsLogin, setMember }) => {
         password,
       })
       .then((res) => {
-        setMessage(res.data.message);
+        alert(res.data.message);
         if (res.data.data != null) {
           setIsLogin(true);
           setMember(res.data.data);
@@ -34,7 +32,6 @@ const LoginForm = ({ setIsLogin, setMember }) => {
   return (
     <div className="login-container">
       <h1>Login Page!</h1>
-      <DisplayMessage message={message} setMessage={setMessage} />
       <form onSubmit={submitHandler}>
         <div>
           <label>Email: </label>
@@ -52,7 +49,7 @@ const LoginForm = ({ setIsLogin, setMember }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">회원가입</button>
+        <button type="submit">로그인</button>
       </form>
     </div>
   );

@@ -1,14 +1,12 @@
 // JoinForm.js
 import axios from "axios";
 import React, { useState } from "react";
-import DisplayMessage from "./DisplayMessage";
 
 const JoinForm = () => {
   const API_URL = process.env.REACT_APP_HOMEPAGE_API_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
-  const [message, setMessage] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -20,7 +18,7 @@ const JoinForm = () => {
         nickname,
       })
       .then((res) => {
-        setMessage(res.data.message);
+        alert(res.data.message);
       })
       .catch((err) => {
         console.error(err);
@@ -30,7 +28,6 @@ const JoinForm = () => {
   return (
     <div className="join-container">
       <h1>Join Page!</h1>
-      <DisplayMessage message={message} setMessage={setMessage} />
       <form onSubmit={submitHandler}>
         <div>
           <label>Email: </label>
